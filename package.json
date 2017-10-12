@@ -1,0 +1,23 @@
+{
+  "name": "haraka-mail-simulator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/mail_simulator.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "update-dist" : "git add -A ./dist"
+  },
+  "pre-commit": [
+    "build",
+    "update-dist"
+  ],
+  "author": "Andrew Theken <andrew@wildbit.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "pre-commit": "^1.2.2",
+    "typescript": "^2.5.3"
+  },
+  "dependencies": {
+    "Haraka": "^2.8.16"
+  }
+}

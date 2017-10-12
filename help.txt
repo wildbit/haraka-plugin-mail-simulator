@@ -1,0 +1,35 @@
+                        MAIL SIMULATOR
+
+*********************************************************************
+ This is a mail simulator. It will not relay mail anywhere, 
+ but it can generate useful responses for common non-delivery
+ scenarios.
+*********************************************************************
+
+ Here are some example usages:
+
+ Produce a immediate soft bounce for this address (450)
+    
+    `anything+transient-bounce@[[base_domain]]`
+
+ Produce an immediate hard bounce for this address (550)
+
+    `anything+hard-bounce@[[base_domain]]`
+
+ Produce an immediate bounce with the specified enhanced code (x.y.z):
+
+    `anything!extended_code=x.y.z@[[base_domain]]`
+
+ Additional supported commands are:
+
+    !base_code=XXX
+    !bounce_until=timestamp (must be a unix utc timestamp - in seconds)
+
+ Multiple commands may be included in the address like so:
+
+    `anything!extended_code=4.3.1!base_code=454!bounce_until=177327837@...`
+
+ Valid extended codes can be found in RFC 3463.
+ https://tools.ietf.org/html/rfc3463
+
+*********************************************************************
