@@ -14,10 +14,9 @@
   "author": "Andrew Theken <andrew@wildbit.com>",
   "license": "MIT",
   "devDependencies": {
+    "Haraka": "^2.8.16",
     "pre-commit": "^1.2.2",
     "typescript": "^2.5.3"
   },
-  "dependencies": {
-    "Haraka": "^2.8.16"
-  }
+  "dependencies": {}
 }

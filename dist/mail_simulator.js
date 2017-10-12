@@ -9,16 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// this is a "special" haraka require.
-var DSN = require('./dsn');
 const path_1 = require("path");
 const fs = require("fs");
 var helpContent = '';
 var config = {};
 var plugin;
+//this will be required in once the plugin is loaded.
+var DSN;
 function register() {
     plugin = this;
     plugin.load_config();
+    DSN = plugin.core_require('dsn');
 }
 exports.register = register;
 ;

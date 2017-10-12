@@ -1,7 +1,5 @@
 ///<reference types="Haraka"/>
 
-// this is a "special" haraka require.
-var DSN = require('./dsn');
 import { join } from 'path';
 import  *  as fs from 'fs';
 
@@ -11,9 +9,12 @@ var helpContent = '';
 var config:any = {};
 var plugin;
 
+//this will be required in once the plugin is loaded.
+var DSN;
 export function register() {
     plugin = this;
     plugin.load_config();
+    DSN =  plugin.core_require('dsn');
 };
 
 export function load_config() {
