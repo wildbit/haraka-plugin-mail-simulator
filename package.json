@@ -1,11 +1,11 @@
 {
   "name": "haraka-mail-simulator",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "A haraka plugin to easily simulate SMTP interactions.",
   "main": "dist/mail_simulator.js",
   "scripts": {
-    "build": "tsc -p .",
-    "update-dist" : "git add -A ./dist"
+    "build": "tsc -p . || true",
+    "update-dist": "git add -A ./dist"
   },
   "pre-commit": [
     "build",

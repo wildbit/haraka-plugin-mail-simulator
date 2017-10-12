@@ -7,6 +7,7 @@ import  *  as fs from 'fs';
 
 var helpContent = '';
 
+
 var config:any = {};
 var plugin;
 

@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var DSN = require('./dsn');
 const path_1 = require("path");
 const fs = require("fs");
-var helpContent = fs.readFileSync(path_1.join(__dirname, '..', 'help.txt'), 'utf8');
+var helpContent = '';
 var config = {};
 var plugin;
 function register() {
@@ -24,6 +24,7 @@ exports.register = register;
 ;
 function load_config() {
     config = plugin.config.get('mail-simulator.ini', () => plugin.load_config());
+    helpContent = fs.readFileSync(path_1.join(__dirname, '..', 'help.txt'), 'utf8').replace('[[base_domain]]', config.base_domain || 'localhost');
 }
 exports.load_config = load_config;
 var behavior_params_finder = /(!([^!=]+)=([^!=]+))+$/;
@@ -98,7 +99,8 @@ function hook_rcpt(next, connection, recipients) {
                 next(DENYSOFT, "Mailbox currently unavailable, please try again later.");
             }
             else if (recipients.find(k => /\+blackhole$/i.test(k.user)) ||
-                recipients.find(k => /blackhole[.]((postmarkapp[.]com)|(qa[.]wildbit[.]com))$/i.test(k.host))) {
+                //blackhole anything with the domain "blackhole" in it.    
+                recipients.find(k => /blackhole/i.test(k.host))) {
                 next(OK, "Just so you know, I'll send this message to the void.");
             }
             else {
