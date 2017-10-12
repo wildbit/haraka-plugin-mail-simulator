@@ -1,5 +1,5 @@
 {
-  "name": "haraka-mail-simulator",
+  "name": "haraka-plugin-mail-simulator",
   "version": "0.0.1",
   "description": "A haraka plugin to easily simulate SMTP interactions.",
   "main": "dist/mail_simulator.js",
