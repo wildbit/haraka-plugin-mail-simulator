@@ -19,7 +19,8 @@ export function register() {
 
 export function load_config() {
     config = plugin.config.get('mail-simulator.ini', () => plugin.load_config());
-    helpContent = fs.readFileSync(join(__dirname, '..', 'help.txt'), 'utf8').replace(/\[\[base_domain]]/g, config.base_domain || 'localhost');
+    var help = fs.readFileSync(join(__dirname, '..', 'help.txt'), 'utf8');
+    helpContent = help.replace(/\[\[base_domain\]\]/g, config.base_domain || 'localhost');
 }
 
 var behavior_params_finder = /(!([^!=]+)=([^!=]+))+$/;
