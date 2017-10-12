@@ -6,7 +6,11 @@ import  *  as fs from 'fs';
 var helpContent = '';
 
 
-var config:any = {};
+var config:any = {
+    "main": {
+        "base_domain" : "localhost"
+    }
+};
 var plugin;
 
 //this will be required in once the plugin is loaded.
@@ -20,7 +24,7 @@ export function register() {
 export function load_config() {
     config = plugin.config.get('mail-simulator.ini', () => plugin.load_config());
     var help = fs.readFileSync(join(__dirname, '..', 'help.txt'), 'utf8');
-    helpContent = help.replace(/\[\[base_domain\]\]/g, config.base_domain || 'localhost');
+    helpContent = help.replace(/\[\[base_domain\]\]/g, config.main.base_domain);
 }
 
 var behavior_params_finder = /(!([^!=]+)=([^!=]+))+$/;

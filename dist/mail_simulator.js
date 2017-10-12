@@ -12,7 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = require("path");
 const fs = require("fs");
 var helpContent = '';
-var config = {};
+var config = {
+    "main": {
+        "base_domain": "localhost"
+    }
+};
 var plugin;
 //this will be required in once the plugin is loaded.
 var DSN;
@@ -26,7 +30,7 @@ exports.register = register;
 function load_config() {
     config = plugin.config.get('mail-simulator.ini', () => plugin.load_config());
     var help = fs.readFileSync(path_1.join(__dirname, '..', 'help.txt'), 'utf8');
-    helpContent = help.replace(/\[\[base_domain\]\]/g, config.base_domain || 'localhost');
+    helpContent = help.replace(/\[\[base_domain\]\]/g, config.main.base_domain);
 }
 exports.load_config = load_config;
 var behavior_params_finder = /(!([^!=]+)=([^!=]+))+$/;
