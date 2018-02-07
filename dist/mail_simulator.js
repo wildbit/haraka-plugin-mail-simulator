@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const querystring_1 = require("querystring");
 const path_1 = require("path");
 const fs = require("fs");
 var helpContent = '';
@@ -79,12 +80,16 @@ function hook_rcpt(next, connection, recipients) {
                     if (commands.base_code) {
                         base_code = parseInt(commands.base_code);
                     }
+                    var reason = commands.reason;
+                    if (commands.reason) {
+                        reason = querystring_1.unescape(reason);
+                    }
                     if (base_code >= 400 && base_code <= 499) {
-                        var dsnResult = new DSN.create(base_code, commands.reason, ...extended_code);
+                        var dsnResult = new DSN.create(base_code, reason, ...extended_code);
                         next(DENYSOFT, dsnResult);
                     }
                     else if (base_code >= 500) {
-                        var dsnResult = new DSN.create(base_code, commands.reason, ...extended_code);
+                        var dsnResult = new DSN.create(base_code, reason, ...extended_code);
                         next(DENY, dsnResult);
                     }
                     else if (base_code < 400) {

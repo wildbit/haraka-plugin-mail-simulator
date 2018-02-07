@@ -1,5 +1,6 @@
 ///<reference types="Haraka"/>
 
+import { unescape } from 'querystring';
 import { join } from 'path';
 import  *  as fs from 'fs';
 
@@ -75,11 +76,16 @@ export async function hook_rcpt(next, connection: haraka.Connection, recipients:
                     base_code = parseInt(commands.base_code);
                 }
 
+                var reason = commands.reason;
+                if (commands.reason) {
+                    reason = unescape(reason);
+                }
+
                 if (base_code >= 400 && base_code <= 499) {
-                    var dsnResult = new DSN.create(base_code, commands.reason, ...extended_code);
+                    var dsnResult = new DSN.create(base_code, reason, ...extended_code);
                     next(DENYSOFT, dsnResult)
                 } else if (base_code >= 500) {
-                    var dsnResult = new DSN.create(base_code, commands.reason, ...extended_code);
+                    var dsnResult = new DSN.create(base_code, reason, ...extended_code);
                     next(DENY, dsnResult);
                 } else if(base_code < 400){
                     next(OK);
